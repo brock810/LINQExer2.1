@@ -52,11 +52,11 @@ namespace LinqExercise
             var ascendingNumbers = numbers.OrderBy(x => x);
             foreach (var num in ascendingNumbers)
             {
-                Console.WriteLine($"num); ");
+                Console.WriteLine($"{num} ");
             }
             Console.WriteLine();
 
-            var descendingNumbers=numbers.OrderBy(x => x);
+            var descendingNumbers= numbers.OrderByDescending(x => x);
             foreach (var num in descendingNumbers)
             {
                 Console.WriteLine($"{num} ");
