@@ -35,7 +35,6 @@ namespace LinqExercise
             //TODO: Change the value at index 4 to your age, then print the numbers in decsending order
 
             // List of employees ****Do not remove this****
-            var employees = CreateEmployees();
 
             //TODO: Print all the employees' FullName properties to the console only if their FirstName starts with a C OR an S and order this in ascending order by FirstName.
 
@@ -46,9 +45,79 @@ namespace LinqExercise
             //TODO: Add an employee to the end of the list without using employees.Add()
 
 
+            Console.WriteLine(numbers.Sum());
+
+            Console.WriteLine(numbers.Average());
+
+            var ascendingNumbers = numbers.OrderBy(x => x);
+            foreach (var num in ascendingNumbers)
+            {
+                Console.WriteLine($"num); ");
+            }
             Console.WriteLine();
 
-            Console.ReadLine();
+            var descendingNumbers=numbers.OrderBy(x => x);
+            foreach (var num in descendingNumbers)
+            {
+                Console.WriteLine($"{num} ");
+            }
+            Console.WriteLine();
+
+            var greaterThanSix = numbers.Where(x => x > 6);
+            foreach (var num in greaterThanSix) 
+            {
+                Console.WriteLine($"{num} ");
+            }
+            Console.WriteLine() ;
+
+            var fourNumbers = numbers.OrderBy(x => x).Take(4);
+            foreach (var num in fourNumbers)
+            {
+                Console.WriteLine($"{num} ");
+            }
+            Console.WriteLine();
+
+            numbers[4] = 28;
+            var modifiedNumbers = numbers.OrderByDescending(x => x);
+            foreach (var num in modifiedNumbers)
+            {
+                Console.Write($"{num} ");
+            }
+            Console.WriteLine();
+
+
+            var employees = CreateEmployees();
+
+
+            var selectedEmployees = employees.Where(x => x.FirstName.StartsWith("C") || x.FirstName.StartsWith("S"))
+                                            .OrderBy(x => x.FirstName);
+            foreach (var emp in selectedEmployees)
+            {
+                Console.WriteLine(emp.FullName);
+            }
+
+            var employeesOver26 = employees.Where(x => x.Age > 26)
+                                        .OrderBy(x => x.Age)
+                                        .ThenBy(x => x.FirstName);
+            foreach (var emp in employeesOver26)
+            {
+                Console.WriteLine($"{emp.FullName}, {emp.Age}");
+            }
+
+            var filteredEmployees = employees.Where(e => e.YearsOfExperience <= 10 && e.Age > 35);
+            int sumOfYOE = filteredEmployees.Sum(e => e.YearsOfExperience);
+            double averageOfYOE = filteredEmployees.Average(e => e.YearsOfExperience);
+
+            Console.WriteLine("Sum of YearsOfExperience: " + sumOfYOE);
+            Console.WriteLine("Average of YearsOfExperience: " + averageOfYOE);
+
+
+            var newEmployee = new Employee("John", "Doe", 30, 3);
+            employees.Insert(employees.Count, newEmployee);
+
+
+
+
         }
 
         #region CreateEmployeesMethod
